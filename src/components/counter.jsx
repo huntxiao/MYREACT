@@ -18,10 +18,14 @@ class Counter extends Component {
   //   handleIncrement() {
   //     console.log("Increment Clicked", this); //构造器实现绑定this
   //   }
-  handleIncrement = () => {
+  handleIncrement = product => {
     console.log("Increment Clicked", this); //箭头函数不会重新绑定this
+    console.log(product);
     this.setState({ count: this.state.count + 1 });
   };
+  // doHandleIncrement = () => {
+  //   this.handleIncrement({ id: 1 });
+  // };
   handleSubstract = () => {
     this.setState({ count: this.state.count - 1 });
   };
@@ -29,21 +33,15 @@ class Counter extends Component {
     // React.createElement("div");
     return (
       <React.Fragment>
-        <span style={{ fontSize: 20 }} className={this.getBadgeClasses()}>
+        <span style={{ fontSize: 16 }} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
-        <br />
         <button
-          onClick={this.handleIncrement}
+          //onClick={this.doHandleIncrement}
+          onClick={() => this.handleIncrement({ id: 1 })}
           className="btn btn-secondary btn-sm"
         >
           Increment
-        </button>
-        <button
-          onClick={this.handleSubstract}
-          className="btn btn-secondary btn-sm"
-        >
-          Substract
         </button>
         {this.state.tags.length === 0 && "Please create a new tag!"}
         {this.renderTags()}
@@ -71,7 +69,6 @@ class Counter extends Component {
 
   formatCount() {
     const { count } = this.state;
-    console.dir(count);
     return count === 0 ? "It's Zero now, fuck ya" : count;
   }
 }
