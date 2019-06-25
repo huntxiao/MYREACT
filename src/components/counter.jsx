@@ -7,7 +7,7 @@ class Counter extends Component {
     this.handleIncrement = this.handleIncrement.bind(this); // 因为默认严格模式开启，绑定当前的this
   }
   state = {
-    count: 0,
+    count: this.props.value,
     imgurl: "https://picsum.photos/200",
     tags: ["tag1", "tag2", "tag3"]
   };
@@ -31,6 +31,7 @@ class Counter extends Component {
   };
   render() {
     // React.createElement("div");
+    console.log("props", this.props);
     return (
       <React.Fragment>
         <span style={{ fontSize: 16 }} className={this.getBadgeClasses()}>
