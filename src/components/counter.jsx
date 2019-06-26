@@ -7,7 +7,7 @@ class Counter extends Component {
   //   this.handleIncrement = this.handleIncrement.bind(this); // 因为默认严格模式开启，绑定当前的this
   // }
   state = {
-    value: this.props.value
+    value: this.props.counter.value
   };
   styles = {
     fontWeight: "bolder",
@@ -16,7 +16,6 @@ class Counter extends Component {
 
   handleIncrement = product => {
     console.log("Increment Clicked", this); //箭头函数不会重新绑定this
-    console.log(product);
     this.setState({ value: this.state.value + 1 });
   };
   // doHandleIncrement = () => {
@@ -25,11 +24,13 @@ class Counter extends Component {
   handleSubstract = () => {
     this.setState({ value: this.state.value - 1 });
   };
+
   render() {
     // React.createElement("div");
     console.log("props", this.props);
     return (
       <React.Fragment>
+        {this.props.children}
         <span style={{ fontSize: 16 }} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
@@ -39,6 +40,14 @@ class Counter extends Component {
           className="btn btn-secondary btn-sm"
         >
           Increment
+        </button>
+        <button
+          onClick={() => {
+            this.props.onDelete(this.props.counter.id);
+          }}
+          className="btn btn-danger btn-sm m-2"
+        >
+          Delete
         </button>
       </React.Fragment>
     );
